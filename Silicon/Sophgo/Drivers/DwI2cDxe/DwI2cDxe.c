@@ -730,6 +730,7 @@ GetI2cInfoByFdt (
   CONST VOID           *Prop;
   UINT32               PropSize;
   I2C_INFO             *I2cInfoPointer, *I2cInformation;
+  UINT32               Index;
 
   Status = gBS->LocateProtocol (&gFdtClientProtocolGuid, NULL, (VOID **)&FdtClient);
   if (Status) {
@@ -769,6 +770,16 @@ GetI2cInfoByFdt (
       continue;
     } else {
       I2cInfoPointer->Base  = SwapBytes64 (((CONST UINT64 *)Prop)[0]);
+      if (PcdGet32 (PcdCpuRiscVMmuMaxSatpMode) > 0UL) {
+        for (Index = 39; Index < 64; Index++) {
+          if (I2cInfoPointer->Base & (1ULL << 38)) {
+            I2cInfoPointer->Base |= (1ULL << Index);
+          } else {
+            I2cInfoPointer->Base &= ~(1ULL << Index);
+          }
+        }
+      }
+
       I2cInfoPointer->Freq  = Frequency;
       I2cInfoPointer->Speed = Speed;
       ++I2cInfoPointer;

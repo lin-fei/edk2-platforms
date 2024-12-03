@@ -12,6 +12,7 @@
 #define __DW_I2C_DXE_H__
 
 #include <Uefi.h>
+#include <Library/PcdLib.h>
 #include <Library/IoLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/DebugLib.h>

@@ -166,6 +166,7 @@ PlatformPeimInitialization (
   // Add SPI Flash Master Controller resource
   //
   PopulateIoResources (Base, "sophgo,spifmc");
+  PopulateIoResources (Base, "snps,designware-i2c");
 
   return EFI_SUCCESS;
 }

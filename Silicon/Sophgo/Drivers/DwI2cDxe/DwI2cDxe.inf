@@ -21,6 +21,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
   Silicon/Sophgo/Sophgo.dec
 
 [LibraryClasses]
@@ -41,6 +42,9 @@
   gFdtClientProtocolGuid          ## CONSUMES
   gEfiCpuArchProtocolGuid         ## CONSUMES
   gSophgoI2cMasterProtocolGuid    ## PRODUCES
+
+[Pcd]
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuRiscVMmuMaxSatpMode             ## CONSUMES
 
 [Depex]
   TRUE
